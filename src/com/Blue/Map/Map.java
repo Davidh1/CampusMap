@@ -78,8 +78,6 @@ public class Map extends Activity implements OnTouchListener {
 		inflater.inflate(R.menu.menu, menu);
 		return true;
 	}
-
-	// this is where the fun begins
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	
