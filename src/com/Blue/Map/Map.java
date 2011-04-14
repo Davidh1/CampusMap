@@ -78,11 +78,12 @@ public class Map extends Activity implements OnTouchListener {
 		inflater.inflate(R.menu.menu, menu);
 		return true;
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	
+
 		// Handle item selection
-		
+
 		switch (item.getItemId()) {
 		case R.id.menu:
 			// alot of this stuff can probably go in GPS.java
@@ -90,8 +91,10 @@ public class Map extends Activity implements OnTouchListener {
 			mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 			Location location = mLocationManager
 					.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-			latitude = location.getLatitude();
-			longitude = location.getLongitude();
+			if (location != null) {
+				latitude = location.getLatitude();
+				longitude = location.getLongitude();
+			}
 			mLocationManager.requestLocationUpdates(
 					LocationManager.GPS_PROVIDER, 1000, 1, mLocationListener);
 			LatLongPixelConversion convertGPSToPixels = new LatLongPixelConversion();
@@ -102,8 +105,6 @@ public class Map extends Activity implements OnTouchListener {
 			// add cases for more menu items
 		default:
 			return super.onOptionsItemSelected(item);
-
-	
 
 		}
 
@@ -129,8 +130,7 @@ public class Map extends Activity implements OnTouchListener {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-		
+
 		view = (ImageView) findViewById(R.id.imageView);
 		// turn on onTouchListener to map
 		view.setOnTouchListener(this);
